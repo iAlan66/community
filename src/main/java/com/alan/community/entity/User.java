@@ -1,5 +1,7 @@
 package com.alan.community.entity;
 
+import java.util.Date;
+
 /**
  * @author Alan
  * @version 1.0
@@ -16,7 +18,7 @@ public class User {
     private int status;
     private String activationCode;
     private String headerUrl;
-    private String creativeTime;
+    private Date createTime;
 
     public int getId() {
         return id;
@@ -90,12 +92,12 @@ public class User {
         this.headerUrl = headerUrl;
     }
 
-    public String getCreativeTime() {
-        return creativeTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreativeTime(String creativeTime) {
-        this.creativeTime = creativeTime;
+    public void setCreateTime(Date creativeTime) {
+        this.createTime = creativeTime;
     }
 
     @Override
@@ -110,7 +112,7 @@ public class User {
                 ", status=" + status +
                 ", activationCode='" + activationCode + '\'' +
                 ", headerUrl='" + headerUrl + '\'' +
-                ", creativeTime='" + creativeTime + '\'' +
+                ", creativeTime='" + createTime + '\'' +
                 '}';
     }
 }
