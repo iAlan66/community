@@ -20,4 +20,6 @@ public interface UserMapper {
     void insertUser(User user);
 
     void updateStatus(int id, int status);
+
+    int updateHeaderUrl(int userId, String headerUrl);
 }
