@@ -1,5 +1,6 @@
 package com.alan.community.controller;
 
+import com.alan.community.annotation.LoginRequired;
 import com.alan.community.entity.User;
 import com.alan.community.service.UserService;
 import com.alan.community.util.CommunityUtil;
@@ -50,12 +51,14 @@ public class UserController {
     private HostHolder hostHolder;
 
     // 用户设置页面
+    @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
         return "/site/setting";
     }
 
     //  头像上传
+    @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadHeader(MultipartFile headerImage, Model model) {
         if (headerImage == null) {
