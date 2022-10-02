@@ -1,5 +1,7 @@
 package com.alan.community;
 
+import com.alan.community.util.CommunityUtil;
+import com.alibaba.fastjson2.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,5 +26,13 @@ public class myTest {
             list.add(map);
         }
         list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testJson(){
+        Map<String, Object> map = new HashMap<>();
+        map.put("age", 10);
+        map.put("name", "alan");
+        System.out.println(CommunityUtil.getJSONString(0,"ok",map));
     }
 }

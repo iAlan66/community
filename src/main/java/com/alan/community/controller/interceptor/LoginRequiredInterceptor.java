@@ -2,7 +2,6 @@ package com.alan.community.controller.interceptor;
 
 import com.alan.community.annotation.LoginRequired;
 import com.alan.community.util.HostHolder;
-import jdk.internal.org.objectweb.asm.Handle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
