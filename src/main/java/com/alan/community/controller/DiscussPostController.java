@@ -97,10 +97,10 @@ public class DiscussPostController implements CommunityConstant {
 
                 // 回复列表
                 List<Comment> replyList = commentService.findCommentsByEntity(
-                        ENTITY_TYPE_COMMENT, comment.getEntityId(), 0, Integer.MAX_VALUE);
+                        ENTITY_TYPE_COMMENT, comment.getId(), 0, Integer.MAX_VALUE);
                 // 回复VO列表
                 List<Map<String, Object>> replyVoList = new ArrayList<>();
-                if (replyVoList != null){
+                if (replyList != null){
                     for (Comment reply:replyList){
                         Map<String, Object> replyVo = new HashMap<>();
                         // 回复
