@@ -56,4 +56,10 @@ public class HomeController {
 //        model.addAttribute("page",page);//方法调用之前，SpringMVC会自动实例化Model和page，这个可以省略
         return "index";
     }
+
+    // error
+    @RequestMapping(value = "/error",method = RequestMethod.GET)
+    public String getErrorPage(){
+        return "/error/500";
+    }
 }
