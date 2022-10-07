@@ -3,6 +3,7 @@ package com.alan.community.dao;
 import com.alan.community.NowcoderCommunityApplication;
 import com.alan.community.entity.DiscussPost;
 import com.alan.community.entity.LoginTicket;
+import com.alan.community.entity.Message;
 import com.alan.community.entity.User;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +33,9 @@ class MapperTest {
     private UserMapper userMapper;
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Test
     void selectDiscussPosts() {
@@ -70,5 +74,40 @@ class MapperTest {
     @Test
     void updateStatus() {
         int abc = loginTicketMapper.updateStatus("abc",1);
+    }
+
+    @Test
+    void selectConversations() {
+        List<Message> messages = messageMapper.selectConversations(111, 0, 10);
+        for (Message message:messages){
+            System.out.println(message);
+        }
+    }
+
+    @Test
+    void selectConversationCount() {
+        int i = messageMapper.selectConversationCount(111);
+        System.out.println(i);
+    }
+
+    @Test
+    void selectLetters() {
+        List<Message> messages = messageMapper.selectLetters("111_112", 0, 10);
+        for (Message message : messages) {
+            System.out.println(message);
+        }
+
+    }
+
+    @Test
+    void selectLetterCount() {
+        int i = messageMapper.selectLetterCount("111_112");
+        System.out.println(i);
+    }
+
+    @Test
+    void selectLetterUnreadCount() {
+        int i = messageMapper.selectLetterUnreadCount(111, "111_112");
+        System.out.println(i);
     }
 }

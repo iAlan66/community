@@ -45,7 +45,7 @@ public class UserService implements CommunityConstant {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    public User findUserByid(int id){
+    public User findUserById(int id){
         return userMapper.selectById(id);
     }
 
@@ -195,6 +195,10 @@ public class UserService implements CommunityConstant {
 
     public int updateHeader(int userId, String headerUrl){
         return userMapper.updateHeaderUrl(userId,headerUrl);
+    }
+
+    public User findUserByName(String username){
+        return userMapper.selectByName(username);
     }
 
 }

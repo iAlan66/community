@@ -1,6 +1,5 @@
 package com.alan.community.controller;
 
-import com.alan.community.dao.UserMapper;
 import com.alan.community.entity.Comment;
 import com.alan.community.entity.DiscussPost;
 import com.alan.community.entity.Page;
@@ -12,7 +11,6 @@ import com.alan.community.util.CommunityConstant;
 import com.alan.community.util.CommunityUtil;
 import com.alan.community.util.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,7 +69,7 @@ public class DiscussPostController implements CommunityConstant {
         DiscussPost post = discussPostService.findDiscussPostById(discussPostId);
         model.addAttribute("post",post);
         // 作者
-        User user = userService.findUserByid(post.getUserId());
+        User user = userService.findUserById(post.getUserId());
         model.addAttribute("user",user);
 
         // 评论的分页信息
@@ -93,7 +91,7 @@ public class DiscussPostController implements CommunityConstant {
                 // 评论
                 commentVo.put("comment",comment);
                 // 作者
-                commentVo.put("user",userService.findUserByid(comment.getUserId()));
+                commentVo.put("user",userService.findUserById(comment.getUserId()));
 
                 // 回复列表
                 List<Comment> replyList = commentService.findCommentsByEntity(
@@ -106,9 +104,9 @@ public class DiscussPostController implements CommunityConstant {
                         // 回复
                         replyVo.put("reply",reply);
                         // 作者
-                        replyVo.put("user",userService.findUserByid(reply.getUserId()));
+                        replyVo.put("user",userService.findUserById(reply.getUserId()));
                         // 评论目标
-                        User target = reply.getTargetId() == 0 ? null : userService.findUserByid(reply.getTargetId());
+                        User target = reply.getTargetId() == 0 ? null : userService.findUserById(reply.getTargetId());
                         replyVo.put("target", target);
 
                         replyVoList.add(replyVo);
