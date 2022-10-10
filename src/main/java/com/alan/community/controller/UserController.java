@@ -2,6 +2,7 @@ package com.alan.community.controller;
 
 import com.alan.community.annotation.LoginRequired;
 import com.alan.community.entity.User;
+import com.alan.community.service.LikeService;
 import com.alan.community.service.UserService;
 import com.alan.community.util.CommunityUtil;
 import com.alan.community.util.HostHolder;
@@ -49,6 +50,9 @@ public class UserController {
 
     @Autowired
     private HostHolder hostHolder;
+
+    @Autowired
+    private LikeService likeService;
 
     // 用户设置页面
     @LoginRequired
@@ -114,8 +118,22 @@ public class UserController {
         } catch (IOException e) {
             logger.error("读取图像失败"+e.getMessage());
         }
-
     }
 
+    // 个人主页
+    @RequestMapping(value = "/profile/{userId}",method = RequestMethod.GET)
+    public String getProfilePage(@PathVariable("userId") int userId, Model model){
+        User user = userService.findUserById(userId);
+        if (user == null){
+            throw  new RuntimeException("用户不存在");
+        }
+        // 用户
+        model.addAttribute("user",user);
 
+        // 点赞数量
+        int likeCount = likeService.findUserLikeCount(userId);
+        model.addAttribute("likeCount",likeCount);
+
+        return "/site/profile";
+    }
 }
