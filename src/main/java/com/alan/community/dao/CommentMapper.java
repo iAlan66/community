@@ -21,4 +21,7 @@ public interface CommentMapper {
 
     // 增加评论
     int insertComment(Comment comment);
+
+    // 根据id查comment
+    Comment selectCommentById(int id);
 }

@@ -1,7 +1,9 @@
 package com.alan.community.controller;
 
+import com.alan.community.entity.Event;
 import com.alan.community.entity.Page;
 import com.alan.community.entity.User;
+import com.alan.community.event.EventProducer;
 import com.alan.community.service.FollowService;
 import com.alan.community.service.UserService;
 import com.alan.community.util.CommunityConstant;
@@ -35,12 +37,24 @@ public class FollowerController implements CommunityConstant {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     @RequestMapping(value = "/follow", method = RequestMethod.POST)
     @ResponseBody
     public String follow(int entityType, int entityId) {
         User user = hostHolder.getUser();
 
         followService.follow(user.getId(), entityType, entityId);
+
+        // 触发关注事件
+        Event event = new Event()
+                .setTopic(TOPIC_Follow)
+                .setUserId(hostHolder.getUser().getId())
+                .setEntityType(entityType)
+                .setEntityId(entityId)
+                .setEntityUserId(entityId);
+        eventProducer.fireEvent(event);
 
         return CommunityUtil.getJSONString(0, "已关注");
     }
@@ -50,7 +64,7 @@ public class FollowerController implements CommunityConstant {
     public String unfollow(int entityType, int entityId) {
         User user = hostHolder.getUser();
 
-        followService.follow(user.getId(), entityType, entityId);
+        followService.unfollow(user.getId(), entityType, entityId);
 
         return CommunityUtil.getJSONString(0, "已取消关注");
     }

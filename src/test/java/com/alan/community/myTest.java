@@ -1,5 +1,6 @@
 package com.alan.community;
 
+import com.alan.community.entity.User;
 import com.alan.community.util.CommunityUtil;
 import com.alibaba.fastjson2.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -34,5 +35,13 @@ public class myTest {
         map.put("age", 10);
         map.put("name", "alan");
         System.out.println(CommunityUtil.getJSONString(0,"ok",map));
+    }
+
+    @Test
+    public void testJsonEntity(){
+        User user = new User();
+        user.setId(10);
+        user.setUsername("alan");
+        System.out.println(JSONObject.toJSONString(user));
     }
 }
